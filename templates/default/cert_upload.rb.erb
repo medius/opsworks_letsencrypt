@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'aws-sdk-opsworks'
+
+crt_file = '<%= node[:letsencrypt][:config_dir] %>/live/<%= @ssl_domains.first %>/fullchain.pem'
+key_file = '<%= node[:letsencrypt][:config_dir] %>/live/<%= @ssl_domains.first %>/privkey.pem'
+
+certificate = File.read(crt_file)
+private_key = File.read(key_file)
+
+opsworks = Aws::OpsWorks::Client.new(region: '<%= @opsworks_region %>')
+stack_id = '<%= @stack_id %>'
+
+apps = opsworks.describe_apps(stack_id: stack_id).apps
+app = apps.first
+
+puts "App Name: #{app.name}"
+
+if app.enable_ssl
+  puts "Updating SSL certs.."
+  opsworks.update_app(app_id: app.app_id, ssl_configuration: { certificate: certificate, private_key: private_key})
+  puts "Done."
+else
+  puts "SSL is not enabled for this app. Exiting"
+end
