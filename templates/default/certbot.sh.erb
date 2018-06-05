@@ -1,7 +1,3 @@
 #!/bin/sh
 
-<%- certbot_domains = @ssl_domains.each do |domain| %>
-  <%- "-d #{domain}" %>
-<% end %>
-
-certbot certonly --config-dir <%= node[:letsencrypt][:config_dir] %> --email <%= @email %> -no-eff-email <%= certbot_domains %>
+certbot certonly --config-dir <%= node[:letsencrypt][:config_dir] %> --email <%= @email %> -no-eff-email -d <%= @ssl_domains.join(",") %>
