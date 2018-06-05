@@ -5,7 +5,8 @@
 
 certbot certonly \
   --config-dir <%= node[:letsencrypt][:config_dir] %> \
+  --noninteractive \
   --email <%= @email %> \
-  -no-eff-email \
-  <%= mode %>
+  --no-eff-email \
+  <%= mode %> \
   -d <%= @ssl_domains.join(",") %>
