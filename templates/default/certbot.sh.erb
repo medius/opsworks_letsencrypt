@@ -1,3 +1,11 @@
 #!/bin/sh
 
-certbot certonly --config-dir <%= node[:letsencrypt][:config_dir] %> --email <%= @email %> -no-eff-email -d <%= @ssl_domains.join(",") %>
+<%- webroot_path = node[:letsencrypt][:webroot_path] %>
+<%- mode = webroot_path ? "--webroot -w #{webroot_path}" : "--standalone" %>
+
+certbot certonly \
+  --config-dir <%= node[:letsencrypt][:config_dir] %> \
+  --email <%= @email %> \
+  -no-eff-email \
+  <%= mode %>
+  -d <%= @ssl_domains.join(",") %>
