@@ -1,8 +1,9 @@
 #!/usr/bin/env ruby
 require 'aws-sdk-opsworks'
 
-crt_file = '<%= node[:letsencrypt][:config_dir] %>/live/<%= @ssl_domains.first %>/fullchain.pem'
-key_file = '<%= node[:letsencrypt][:config_dir] %>/live/<%= @ssl_domains.first %>/privkey.pem'
+cert_dir = '<%= node[:letsencrypt][:config_dir] %>/live/<%= node[:letsencrypt][:cert_name] %>'
+crt_file = cert_dir + '/fullchain.pem'
+key_file = cert_dir + '/privkey.pem'
 
 certificate = File.read(crt_file)
 private_key = File.read(key_file)

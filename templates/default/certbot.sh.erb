@@ -5,6 +5,7 @@
 
 certbot certonly \
   --config-dir <%= node[:letsencrypt][:config_dir] %> \
+  --cert-name <%= node[:letsencrypt][:cert_name] %> \
   --noninteractive \
   --agree-tos \
   --email <%= @email %> \
