@@ -42,3 +42,17 @@ template "#{node[:letsencrypt][:scripts_path]}/cert_upload.rb" do
     ssl_domains: node[:letsencrypt][:ssl_domains]
   )
 end
+
+template "#{node[:letsencrypt][:scripts_path]}/backup_to_s3.rb" do
+  source 'backup_to_s3.sh.erb'
+  owner 'root'
+  group 'root'
+  mode 0744
+end
+
+template "#{node[:letsencrypt][:scripts_path]}/download_from_s3.rb" do
+  source 'download_from_s3.sh.erb'
+  owner 'root'
+  group 'root'
+  mode 0744
+end

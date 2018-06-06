@@ -1,0 +1,3 @@
+#!/bin/sh
+
+aws s3 sync s3://<%= node[:letsencrypt][:s3_backup_bucket] %> <%= node[:letsencrypt][:config_dir] %> --region <%= node[:letsencrypt][:s3_backup_region] %>
