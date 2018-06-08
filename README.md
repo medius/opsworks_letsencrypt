@@ -2,6 +2,7 @@
 
 Steps
 - Configure Stack settings
+- Add this cookbook/receipe to the appropriate layer in Opsworks
 - Allow webserver (if running) to accept letsencrypt challenges (webroot or standalone)
 - Issue certs
 - Upload certs to app
