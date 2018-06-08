@@ -1,6 +1,12 @@
 #!/bin/sh
 
-<%- webroot_path = node[:letsencrypt][:webroot_path] %>
+
+<%- if node[:letsencrypt][:webroot_mode] %>
+  <%- mode = "--webroot -w #{node[:letsencrypt][:webroot_path]}"%>
+<%- else %>
+  <%- mode = "--standalone --http-01-address #{node[:letsencrypt][:standalone_host]} --http-01-port #{node[:letsencrypt][:standalone_port]}"%>
+<%- end %>
+
 <%- mode = webroot_path ? "--webroot -w #{webroot_path}" : "--standalone" %>
 
 certbot certonly \
