@@ -9,7 +9,7 @@
 # If any problem, revert by
 # 1) ./download_from_s3.sh
 # 2) ./cert_upload.rb
-# 3) Deploy the app
+# 3) Deploy the app to all servers
 
 <%- if node[:letsencrypt][:webroot_mode] %>
   <%- mode = "--webroot -w #{node[:letsencrypt][:webroot_path]}"%>

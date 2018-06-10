@@ -14,10 +14,6 @@ package "certbot" do
   action  :install
 end
 
-chef_gem 'aws-sdk-opsworks' do
-  action :install
-end
-
 template "#{node[:letsencrypt][:scripts_path]}/certbot.sh" do
   source 'certbot.sh.erb'
   owner 'root'
