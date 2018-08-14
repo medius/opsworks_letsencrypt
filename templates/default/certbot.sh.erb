@@ -6,6 +6,7 @@
 # If successful, run ./cert_upload.rb
 # Deploy the app and check if certs working correctly
 # Only if certs are running, run ./backup_to_s3
+#
 # If any problem, revert by
 # 1) ./download_from_s3.sh
 # 2) ./cert_upload.rb
@@ -24,5 +25,6 @@ certbot certonly \
   --agree-tos \
   --email <%= @email %> \
   --no-eff-email \
+  --preferred-challenges http \
   <%= mode %> \
   -d <%= @ssl_domains.join(",") %>
