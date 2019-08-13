@@ -18,7 +18,7 @@
   <%- mode = "--standalone --http-01-address #{node[:letsencrypt][:standalone_host]} --http-01-port #{node[:letsencrypt][:standalone_port]}"%>
 <%- end %>
 
-certbot-auto certonly \
+<%= node[:letsencrypt][:config_dir]%>/certbot-auto certonly \
   --config-dir <%= node[:letsencrypt][:config_dir] %> \
   --cert-name <%= node[:letsencrypt][:cert_name] %> \
   --noninteractive \
