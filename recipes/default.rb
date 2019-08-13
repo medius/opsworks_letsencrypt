@@ -1,17 +1,16 @@
-package 'software-properties-common' do
-  action :install
-end
-
-execute "add-ppa-update" do
-  command "add-apt-repository #{node[:letsencrypt][:ppa_path]} && apt-get update -y"
+execute "wget-certbot" do
+  command "wget https://dl.eff.org/certbot-auto"
   action :run
 end
 
-package "certbot" do
-  retries 3
-  retry_delay 5
+execute "mv-certbot" do
+  command "mv certbot-auto #{node[:letsencrypt][:scripts_path]}/certbot-auto"
+  action :run
+end
 
-  action  :install
+execute "chmod-certbot" do
+  command "chmod 0755 #{node[:letsencrypt][:scripts_path]}/certbot-auto"
+  action :run
 end
 
 template "#{node[:letsencrypt][:scripts_path]}/certbot.sh" do
