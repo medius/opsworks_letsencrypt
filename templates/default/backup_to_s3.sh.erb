@@ -1,4 +1,4 @@
 #!/bin/sh
 
-tar zcvf /tmp/letsencrypt.tar.gz <%= node[:letsencrypt][:config_dir] %>
-aws s3 cp /tmp/letsencrypt.tar.gz s3://<%= node[:letsencrypt][:s3_backup_bucket] %> --region <%= node[:letsencrypt][:s3_backup_region] %>
+tar zcvf /tmp/acme.sh.tar.gz /root/.acme.sh
+aws s3 cp /tmp/acme.sh.tar.gz s3://<%= node[:letsencrypt][:s3_backup_bucket] %> --region <%= node[:letsencrypt][:s3_backup_region] %>
