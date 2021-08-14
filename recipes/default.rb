@@ -1,8 +1,3 @@
-execute 'wget-cert-software' do
-  command "curl https://get.acme.sh | sh -s #{node[:letsencrypt][:email]}"
-  action :run
-end
-
 template "#{node[:letsencrypt][:scripts_path]}/get_certs.sh" do
   source 'get_certs.sh.erb'
   owner 'root'

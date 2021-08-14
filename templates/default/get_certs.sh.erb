@@ -12,4 +12,5 @@
 # 2) ./cert_upload.rb
 # 3) Deploy the app to all servers
 
+curl https://get.acme.sh | sh -s <%= node[:letsencrypt][:email]} %>
 /root/.acme.sh/acme.sh --server letsencrypt --issue -d <%= @ssl_domains.join(",") %> -w <%= node[:letsencrypt][:webroot_path] %>
